@@ -54,6 +54,35 @@ Think of it as:
 - `scripts/check-openclaw-targets.sh`
 - `scripts/validate-persona-workspace.sh`
 
+## Why this exists
+
+Most agent skills in this space focus on orchestration, automation, or task decomposition.
+This one exists for a different reason:
+
+**OpenClaw is powerful enough that agents can easily misconfigure it when they start guessing.**
+
+Typical failure modes include:
+- editing config without checking docs
+- treating `config.patch` like full convergence
+- blaming prompts when the real issue is `workspace`
+- validating that a bot responds, but not validating identity or structure
+- leaving stale bindings, ids, or accounts behind
+
+This skill exists to reduce those mistakes.
+
+## What makes it different
+
+This is not a generic multi-agent framework skill.
+It is an **OpenClaw operator skill** focused on:
+- docs-first decision making
+- config hygiene
+- persona and workspace debugging
+- routing and binding correctness
+- validation-first operational discipline
+- safer self-administration for OpenClaw environments
+
+If other skills help agents do more, this one helps them **break less**.
+
 ## Tagline
 
 **Stop guessing. Start operating.**
