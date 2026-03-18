@@ -1,9 +1,14 @@
 ---
 name: openclaw-ops
-description: Manage and troubleshoot an OpenClaw installation safely. Use when working on OpenClaw config, agents, workspaces, agentDir, SOUL/AGENTS/USER loading, bindings, Telegram/Discord accounts, sessions, cron, gateway, plugins, docs lookup, or when diagnosing why an OpenClaw persona/routing/config change did not behave as expected.
+description: Guardrails and operational playbooks for having OpenClaw safely manage OpenClaw itself. Use when working on OpenClaw config, config.patch vs config.apply, agents, workspaces, agentDir, SOUL/AGENTS/USER loading, bindings, Telegram/Discord accounts, routing, sessions, cron, gateway, plugins, docs lookup, config hygiene, persona debugging, or when diagnosing why an OpenClaw change behaved differently than expected.
 ---
 
 # OpenClaw Ops
+
+**Stop guessing. Start operating.**
+
+This is an **OpenClaw operator skill**: a guardrail layer for safe self-administration.
+It is for situations where OpenClaw is changing, diagnosing, or maintaining **OpenClaw itself**.
 
 ## Core rule
 When the task is about **OpenClaw itself**, do this order:
