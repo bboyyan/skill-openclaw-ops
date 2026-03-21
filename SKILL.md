@@ -47,7 +47,47 @@ After any OpenClaw change, validate:
 
 ### 4. Docs before edits
 For framework behavior, do not infer from Claude Code/Codex/Cursor habits.
-OpenClaw has its own rules for workspace loading, bindings, accounts, and restart behavior.
+OpenClaw has its own rules for workspace loading, bindings, accounts, restart behavior, and gateway exposure.
+
+### 5. Source checkout vs global CLI install
+Do not assume `openclaw` is globally available in `PATH`.
+A source checkout can be healthy even when `openclaw` is not resolvable from a cron/agent/launchd shell.
+Before reporting "CLI missing" as a problem, determine which install mode is in use:
+- global CLI install
+- source checkout
+- wrapper-managed runtime
+
+If the machine is clearly running a source checkout, treat "CLI not found" as an environment/path fact first, not an automatic failure.
+
+### 6. Gateway bind: use config, not guessed launch args
+When restricting or exposing the Gateway, prefer the documented config fields:
+- `gateway.bind`
+- `gateway.customBindHost` (only when needed)
+
+Do **not** invent or cargo-cult launch arguments such as `gateway --host ...` unless current docs explicitly show that exact runtime supports them.
+For OpenClaw self-changes, inspect docs/schema first, then change config, then restart and verify.
+
+### 7. Browser tabs: lock to `targetId`
+For OpenClaw browser work, do not assume `targetUrl` is stable enough for repeated screenshot/snapshot/console calls.
+Preferred pattern:
+1. `open` the page
+2. capture the returned `targetId`
+3. use that same `targetId` for follow-up `screenshot`, `snapshot`, `console`, and `act` calls
+
+Why:
+- URL-based follow-up calls can drift to the wrong tab
+- symptoms include blank screenshots, empty snapshots, or console output from `about:blank`
+- if the page title is correct in one tab but the screenshot is blank, suspect wrong-target attachment before blaming the site itself
+
+### 8. Validation is not optional
+After changing config, launchd/systemd units, bindings, or gateway exposure, do a real verification pass.
+At minimum verify:
+- the config on disk matches intent
+- the process restarted cleanly
+- the listener/bind behavior matches intent
+- the actual user-facing path still works
+
+Never report success from reasoning alone.
 
 ## Fast checklist
 - Read docs first
