@@ -9,14 +9,25 @@ description: Guardrails and operational playbooks for having OpenClaw safely man
 
 This is an **OpenClaw operator skill**: a guardrail layer for safe self-administration.
 It is for situations where OpenClaw is changing, diagnosing, or maintaining **OpenClaw itself**.
+It should be treated as a **read-first skill** for OpenClaw self-changes, not as optional background reading.
 
-## Core rule
+## Operator rules
+- Read this skill first when working on OpenClaw itself.
+- Do not modify OpenClaw config from memory alone.
+- Use bundled/local docs first, then official docs if needed.
+- Inspect current state before changing anything.
+- Prefer the smallest safe change.
+- Prefer documented config fields over guessed launch arguments.
+- Validate behavior after every change before declaring success.
+
+## Mandatory flow
 When the task is about **OpenClaw itself**, do this order:
-1. Read bundled/local docs for the current OpenClaw workspace (for example `<workspace>/docs`)
-2. If local docs are insufficient, consult `https://docs.openclaw.ai`
-3. Inspect current config/state
-4. Change the smallest thing possible
-5. Validate with a real test
+1. Determine install mode (`global CLI install` / `source checkout` / wrapper-managed runtime)
+2. Read bundled/local docs for the current OpenClaw workspace (for example `<workspace>/docs`)
+3. If local docs are insufficient, consult `https://docs.openclaw.ai`
+4. Inspect current config/state/logs/process
+5. Change the smallest thing possible
+6. Validate with a real test
 
 Never rely on memory alone for OpenClaw behavior.
 
